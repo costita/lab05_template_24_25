@@ -14,6 +14,7 @@ Graphs are a versatile tool for solving a variety of problems in different field
 There are several properties and algorithms associated with graphs, such as breadth-first and depth-first search, shortest path algorithms, connectivity analysis, and graph coloring. Graphs are a crucial foundation for solving complex problems, helping to optimize processes, model real-world systems, and identify patterns in data, making them an essential tool in many domains of science and technology.
 
 ![Figure 1 - Example of graph](images/fig01.png)
+
 Figure 1 - Example of graph
 
 ### ADT Chart
@@ -76,6 +77,7 @@ The FlightsProgram class launches a JavaFX application for viewing and manipulat
 2. In the FlightsView.createInitialModel() method, model the graph illustrated in Figure 2. Table 1 contains information about the flights illustrated.
 
 ![Figure 2 - American airports and respective flights](images/fig02.png)
+
 Figure 2 - American airports and respective flights
 
 | Edge |Code|Distance (mil.)|Company|

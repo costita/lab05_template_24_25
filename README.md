@@ -16,6 +16,7 @@ Grafos são uma ferramenta versátil para resolver uma variedade de problemas em
 Existem várias propriedades e algoritmos associados aos grafos, como a busca em largura e em profundidade, algoritmos de menor caminho, análise de conectividade e coloração de grafos. Os grafos são uma base crucial para a resolução de problemas complexos, ajudando a otimizar processos, modelar sistemas do mundo real e identificar padrões em dados, tornando-se uma ferramenta essencial em muitos domínios da ciência e da tecnologia.
 
 ![Figura 1 - Exemplo de um grafo](images/fig01.png)
+
 Figura 1 - Exemplo de um grafo
 
 ### ADT Graph
@@ -78,6 +79,7 @@ A classe FlightsProgram lança uma aplicação JavaFX para visualização e mani
 2. No método FlightsView.createInitialModel() modele o grafo ilustrado na Figura 2. A tabela 1 contém a informação dos voos ilustrados.
 
 ![Figura 2 - Aeroportos americanos e voos respetivos](images/fig02.png)
+
 Figura 2 - Aeroportos americanos e voos respetivos
 
 | Aresta |Código|Distância (mil.)|Companhia|
