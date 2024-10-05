@@ -1,4 +1,6 @@
-package model;
+package java.model;
+
+import model.Flight;
 
 import static org.junit.jupiter.api.Assertions.*;
 
