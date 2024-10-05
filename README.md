@@ -15,7 +15,8 @@ Grafos são uma ferramenta versátil para resolver uma variedade de problemas em
 
 Existem várias propriedades e algoritmos associados aos grafos, como a busca em largura e em profundidade, algoritmos de menor caminho, análise de conectividade e coloração de grafos. Os grafos são uma base crucial para a resolução de problemas complexos, ajudando a otimizar processos, modelar sistemas do mundo real e identificar padrões em dados, tornando-se uma ferramenta essencial em muitos domínios da ciência e da tecnologia.
 
-![Figura 1 - Exemplo de um grafo](images\fig01.png)
+![Figura 1 - Exemplo de um grafo](images/fig01.png)
+Figura 1 - Exemplo de um grafo
 
 ### ADT Graph
 
@@ -76,7 +77,8 @@ A classe FlightsProgram lança uma aplicação JavaFX para visualização e mani
 
 2. No método FlightsView.createInitialModel() modele o grafo ilustrado na Figura 2. A tabela 1 contém a informação dos voos ilustrados.
 
-![Figura 2 - Aeroportos americanos e voos respetivos](images\fig02.png)
+![Figura 2 - Aeroportos americanos e voos respetivos](images/fig02.png)
+Figura 2 - Aeroportos americanos e voos respetivos
 
 | Aresta |Código|Distância (mil.)|Companhia|
 |:------:|:----:|:----:|:----:|
@@ -107,13 +109,10 @@ Tabela 1 – Descrição dos voos da Figura 2.
 
 4. Implemente os métodos seguintes, manipulando a instância (atributo) existente de Graph<Airport, Flight>:
 
-a. FlightsView.addAirport(String airportCode)
-
-b. FlightsView .addFlight(Vertex<Airport> vertexFrom, Vertex<Airport> vertexTo, String code, String distance)
-
-c. removeFlight(Edge<Flight, Airport> edge)
-
-d. removeAirport(Vertex<Airport> vertex)
+   1. FlightsView.addAirport(String airportCode)
+   2. FlightsView .addFlight(Vertex<Airport> vertexFrom, Vertex<Airport> vertexTo, String code, String distance)
+   3. removeFlight(Edge<Flight, Airport> edge)
+   4. removeAirport(Vertex<Airport> vertex)
 
 5. Lance novamente a aplicação e manipule livremente o modelo através da interação com o utilizador.
 
@@ -121,13 +120,10 @@ d. removeAirport(Vertex<Airport> vertex)
 
 6. Implemente o método FlightsView. updateStatistics(), responsável por popular as estatísticas no fundo da janela. As estatísticas a calcular/mostrar são:
 
-a. Número total de aeroportos;
-
-b. Número total de voos;
-
-c. Aeroporto com mais tráfego (vértice com maior grau);
-
-d. Número de ligações do aeroporto com mais tráfego (arestas incidentes)
+   1. Número total de aeroportos;
+   2. Número total de voos;
+   3. Aeroporto com mais tráfego (vértice com maior grau);
+   4. Número de ligações do aeroporto com mais tráfego (arestas incidentes)
 
 7. Lance novamente a aplicação e verifique que as estatísticas são calculadas corretamente para os vários estados do grafo obtidos após livre manipulação.
 

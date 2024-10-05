@@ -13,7 +13,8 @@ Graphs are a versatile tool for solving a variety of problems in different field
 
 There are several properties and algorithms associated with graphs, such as breadth-first and depth-first search, shortest path algorithms, connectivity analysis, and graph coloring. Graphs are a crucial foundation for solving complex problems, helping to optimize processes, model real-world systems, and identify patterns in data, making them an essential tool in many domains of science and technology.
 
-![Figure 1 - Example of graph](images\fig01.png)
+![Figure 1 - Example of graph](images/fig01.png)
+Figure 1 - Example of graph
 
 ### ADT Chart
 
@@ -74,7 +75,8 @@ The FlightsProgram class launches a JavaFX application for viewing and manipulat
 
 2. In the FlightsView.createInitialModel() method, model the graph illustrated in Figure 2. Table 1 contains information about the flights illustrated.
 
-![Figure 2 - American airports and respective flights](images\fig02.png)
+![Figure 2 - American airports and respective flights](images/fig02.png)
+Figure 2 - American airports and respective flights
 
 | Edge |Code|Distance (mil.)|Company|
 |:------:|:----:|:----:|:----:|
@@ -105,13 +107,10 @@ Table 1 – Description of the flights in Figure 2.
 
 4. Implement the following methods by manipulating the existing instance (attribute) of Graph<Airport, Flight>:
 
-a. FlightsView.addAirport(String airportCode)
-
-b. FlightsView .addFlight(Vertex<Airport> vertexFrom, Vertex<Airport> vertexTo, String code, String distance)
-
-c. removeFlight(Edge<Flight, Airport> edge)
-
-d. removeAirport(Vertex<Airport> vertex)
+   1. FlightsView.addAirport(String airportCode)
+   2. FlightsView .addFlight(Vertex<Airport> vertexFrom, Vertex<Airport> vertexTo, String code, String distance)
+   3. removeFlight(Edge<Flight, Airport> edge)
+   4. removeAirport(Vertex<Airport> vertex)
 
 5. Launch the application again and freely manipulate the model through user interaction.
 
@@ -119,13 +118,10 @@ d. removeAirport(Vertex<Airport> vertex)
 
 6. Implement the FlightsView method. updateStatistics(), responsible for populating the statistics at the bottom of the window. The statistics to be calculated/shown are:
 
-a. Total number of airports;
-
-b. Total number of flights;
-
-c. Airport with the most traffic (vertex with highest degree);
-
-d. Number of airport connections with the most traffic (incident edges)
+    1. Total number of airports;
+    2. Total number of flights;
+    3. Airport with the most traffic (vertex with highest degree);
+    4. Number of airport connections with the most traffic (incident edges)
 
 7. Launch the application again and check that the statistics are calculated correctly for the various states of the graph obtained after free manipulation.
 
