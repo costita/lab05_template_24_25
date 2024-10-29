@@ -57,7 +57,7 @@ public class FlightsView extends BorderPane {
     }
 
     private void createInitialModel() {
-        // TODO: create flight model - Figure 1 of assignment
+        // TODO: create flight model - Figure of assignment
 
         // Vertex<Airport> sfo = graph.insertVertex(new Airport("SFO"));
         // ...
