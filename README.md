@@ -72,7 +72,7 @@ https://javadoc.io/doc/com.brunomnsilva/smartgraph/latest/com/brunomnsilva/smart
 
 A classe FlightsProgram lança uma aplicação JavaFX para visualização e manipulação de um conjunto de aeroportos e voos entre estes.
 
-1. Lance o programa e visualize a sua interface. Neste momento o grafo modelado deverá estar vazio e os botões ainda não manipulam corretamente o grafo. Adicionalmente, as estatísticas apresentadas no fundo da janela também ainda não mostrar valores corretos.
+1. Lance o programa e visualize a sua interface. Neste momento o grafo modelado deverá estar vazio e os botões ainda não manipulam corretamente o grafo. Adicionalmente, as estatísticas apresentadas no fundo da janela também ainda não estão a mostrar valores corretos.
 
 ### Modelação Inicial
 
