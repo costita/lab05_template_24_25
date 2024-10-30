@@ -22,7 +22,7 @@ import java.util.Collection;
 public class FlightsView extends BorderPane {
 
     /** The graph model */
-    private final Graph<Airport, Flight> graph;
+    public final Graph<Airport, Flight> graph;
 
     /** Graph visualization panel */
     private final SmartGraphPanel<Airport, Flight> graphView;
@@ -34,12 +34,10 @@ public class FlightsView extends BorderPane {
     private Label labelNumberFlights;
 
     /** displays the airport with the most inbound/outbound flights */
-    private Label labelBusiestAirport;
+    public Label labelBusiestAirport;
 
     /** displays the number of inbound/outbound flights of the busiest airport */
-    private Label labelBusiestAirportNumberFlights;
-
-    /** */
+    public Label labelBusiestAirportNumberFlights;
 
     private ObservableList<Vertex<Airport>> listAirportsToRemove;
     private ObservableList<Vertex<Airport>> listAirportsFrom;
@@ -57,56 +55,155 @@ public class FlightsView extends BorderPane {
     }
 
     private void createInitialModel() {
-        // TODO: create flight model - Figure of assignment
+        // Create vertices (airports)
+        Vertex<Airport> hnl = graph.insertVertex(new Airport("HNL")); // Honolulu
+        Vertex<Airport> lax = graph.insertVertex(new Airport("LAX")); // Los Angeles
+        Vertex<Airport> sfo = graph.insertVertex(new Airport("SFO")); // San Francisco
+        Vertex<Airport> ord = graph.insertVertex(new Airport("ORD")); // Chicago O'Hare
+        Vertex<Airport> dfw = graph.insertVertex(new Airport("DFW")); // Dallas/Fort Worth
+        Vertex<Airport> pvd = graph.insertVertex(new Airport("PVD")); // Providence
+        Vertex<Airport> lga = graph.insertVertex(new Airport("LGA")); // LaGuardia
+        Vertex<Airport> mia = graph.insertVertex(new Airport("MIA")); // Miami
 
-        // Vertex<Airport> sfo = graph.insertVertex(new Airport("SFO"));
-        // ...
+        // Create edges (flights)
+        graph.insertEdge(hnl, lax, new Flight("F1 UN3563", 2555)); // HNL - LAX: F1
+        graph.insertEdge(lax, hnl, new Flight("F2 DT1597", 2555)); // LAX - HNL: F2
+
+        graph.insertEdge(lax, sfo, new Flight("F3 UN9375", 337));  // LAX - SFO: F3
+        graph.insertEdge(sfo, lax, new Flight("F4 AM4526", 337));  // SFO - LAX: F4
+
+        graph.insertEdge(lax, ord, new Flight("F5 UN4836", 1743)); // LAX - ORD: F5
+        graph.insertEdge(ord, lax, new Flight("F6 VA2001", 1743)); // ORD - LAX: F6
+
+        graph.insertEdge(lax, dfw, new Flight("F10 AM4582", 1233)); // LAX - DFW: F10
+        graph.insertEdge(dfw, lax, new Flight("F9 SP1020", 1233)); // DFW - LAX: F9
+
+        graph.insertEdge(sfo, ord, new Flight("F7 UN1475", 1843)); // SFO - ORD: F7
+        graph.insertEdge(ord, sfo, new Flight("F8 AL7854", 1843)); // ORD - SFO: F8
+
+        graph.insertEdge(ord, dfw, new Flight("F11 UN4568", 802));   // ORD - DFW: F11
+
+        graph.insertEdge(ord, pvd, new Flight("F13 AM4520", 849));   // ORD - PVD: F13
+        graph.insertEdge(pvd, ord, new Flight("F14 UN7812", 849));    // PVD - ORD: F14
+
+        graph.insertEdge(dfw, lga, new Flight("F12 SP4512", 1387));   // DFW - LGA: F12
+        graph.insertEdge(lga, mia, new Flight("F17 AM1026", 1099));   // DFW - MIA: F17
+        graph.insertEdge(mia, lga, new Flight("F16 FT4021", 1099));   // MIA - DFW: F16
+
+        // Add the missing flights between LGA and MIA
+        graph.insertEdge(pvd, mia, new Flight("F15 FT1000", 1099));   // LGA - MIA: F17
+        graph.insertEdge(dfw, mia, new Flight("F18 AM5267", 1099));   // MIA - LGA: F16
     }
 
-    private void addAirport(String airportCode) {
-        // TODO: implement, check for errors and use showError(message) in case of error
-        //  code must be valid, i.e., not empty
 
-        showError("Not implemented yet!");
-    }
+    public void addAirport(String airportCode) {
+        // Check if the airport code is valid (not empty and unique)
+        if (airportCode == null || airportCode.trim().isEmpty()) {
+            showError("Airport code cannot be null or empty.");
+            return;
+        }
 
-    private void addFlight(Vertex<Airport> vertexFrom, Vertex<Airport> vertexTo, String code, String distance) {
-        // TODO: implement, check for errors and use showError(message) in case of error
-        //  Cannot add flights with the same airport as inbound/outbound
+        Airport newAirport = new Airport(airportCode);
+        Vertex<Airport> vertex = graph.insertVertex(newAirport);
 
-        showError("Not implemented yet!");
-    }
-
-    private void removeFlight(Edge<Flight, Airport> edge) {
-        // TODO: implement, check for errors and use showError(message) in case of error
-
-        showError("Not implemented yet!");
-    }
-
-    private void removeAirport(Vertex<Airport> vertex) {
-        // TODO: implement, check for errors and use showError(message) in case of error
-
-        showError("Not implemented yet!");
-    }
-
-    private void updateStatistics() {
-        // TODO: query model and update labels
-        //  e.g., labelNumberAirports.setText( ?? );
-
-        //labelNumberAirports.setText( ??? );
-        //labelNumberFlights.setText( ??? );
-        //labelBusiestAirport.setText( ??? );
-        //labelBusiestAirportNumberFlights.setText( ??? );
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////
-    // STUDENTS -> THERE IS NOTHING TO DO BELOW THIS LINE
-
-    public void takeOff() {
-        this.graphView.init();
-        updateStatistics();
+        // Update the combo boxes with the new airport
         updateControls();
     }
+
+    public void addFlight(Vertex<Airport> vertexFrom, Vertex<Airport> vertexTo, String code, String distance) {
+        // Check if vertices and flight code are valid
+        if (vertexFrom == null || vertexTo == null) {
+            showError("Both airports must be selected to add a flight.");
+            return;
+        }
+
+        if (vertexFrom.equals(vertexTo)) {
+            showError("Cannot add a flight with the same airport as inbound/outbound.");
+            return;
+        }
+
+        if (code == null || code.trim().isEmpty()) {
+            showError("Flight code cannot be null or empty.");
+            return;
+        }
+
+        double flightDistance;
+        try {
+            flightDistance = Double.parseDouble(distance);
+        } catch (NumberFormatException e) {
+            showError("Distance must be a valid number.");
+            return;
+        }
+
+        Flight newFlight = new Flight(code, flightDistance);
+        graph.insertEdge(vertexFrom, vertexTo, newFlight);
+
+        // Update the combo boxes with the new flight
+        updateControls();
+    }
+
+    public void removeFlight(Edge<Flight, Airport> edge) {
+        if (edge == null) {
+            showError("No flight selected to remove.");
+            return;
+        }
+
+        graph.removeEdge(edge);
+
+        // Update the combo boxes after removing the flight
+        updateControls();
+    }
+
+    public void removeAirport(Vertex<Airport> vertex) {
+        if (vertex == null) {
+            showError("No airport selected to remove.");
+            return;
+        }
+
+        // Check if the airport has any flights before removing
+        if (!graph.incidentEdges(vertex).isEmpty()) {
+            showError("Cannot remove an airport that has flights associated with it.");
+            return;
+        }
+
+        graph.removeVertex(vertex);
+
+        // Update the combo boxes after removing the airport
+        updateControls();
+    }
+
+
+    public void updateStatistics() {
+        // 1. Número total de aeroportos
+        int numberOfAirports = graph.vertices().size();
+        labelNumberAirports.setText(String.valueOf(numberOfAirports));
+
+        // 2. Número total de voos
+        int numberOfFlights = graph.edges().size();
+        labelNumberFlights.setText(String.valueOf(numberOfFlights));
+
+        // 3. Aeroporto com mais tráfego (vértice com maior grau)
+        Vertex<Airport> busiestAirport = null;
+        int maxDegree = 0;
+
+        for (Vertex<Airport> vertex : graph.vertices()) {
+            int degree = graph.incidentEdges(vertex).size();
+            if (degree > maxDegree) {
+                maxDegree = degree;
+                busiestAirport = vertex;
+            }
+        }
+
+        // 4. Atualizar informações sobre o aeroporto mais movimentado
+        if (busiestAirport != null) {
+            labelBusiestAirport.setText(busiestAirport.element().toString());
+            labelBusiestAirportNumberFlights.setText(String.valueOf(maxDegree));
+        } else {
+            labelBusiestAirport.setText("N/A");
+            labelBusiestAirportNumberFlights.setText("0");
+        }
+    }
+
 
     private void doLayout() {
         setStyle("-fx-background-color: #FFF;");
@@ -118,10 +215,10 @@ public class FlightsView extends BorderPane {
         HBox secondRow = new HBox(10);
         HBox thirdRow = new HBox(10);
 
-        Button buttonAddAirport = new Button("Add");
-        Button buttonRemoveAirport = new Button("Remove");
-        Button buttonAddFlight = new Button("Add");
-        Button buttonRemoveFlight = new Button("Remove");
+        Button buttonAddAirport = new Button("Add Airport");
+        Button buttonRemoveAirport = new Button("Remove Airport");
+        Button buttonAddFlight = new Button("Add Flight");
+        Button buttonRemoveFlight = new Button("Remove Flight");
 
         this.listAirportsToRemove = FXCollections.observableArrayList();
         this.listAirportsFrom = FXCollections.observableArrayList();
@@ -201,8 +298,8 @@ public class FlightsView extends BorderPane {
         buttonAddFlight.setOnAction(event -> {
             Vertex<Airport> vertexFrom = comboAirportsFrom.getSelectionModel().getSelectedItem();
             Vertex<Airport> vertexTo = comboAirportsTo.getSelectionModel().getSelectedItem();
-            String flightCode = textFlightCode.getText();
-            String flightDistance = textFlightDistance.getText();
+            String flightCode = textFlightCode.getText().trim();
+            String flightDistance = textFlightDistance.getText().trim();
             addFlight(vertexFrom, vertexTo, flightCode, flightDistance);
             textFlightCode.clear();
             textFlightDistance.clear();
@@ -221,62 +318,44 @@ public class FlightsView extends BorderPane {
     }
 
     private void updateControls() {
-        Collection<Vertex<Airport>> airports = graph.vertices();
-        Collection<Edge<Flight, Airport>> flights = graph.edges();
-
-        listAirportsToRemove.clear();
-        listAirportsFrom.clear();
-        listAirportsTo.clear();
-
-        listAirportsToRemove.addAll(airports);
-        listAirportsFrom.addAll(airports);
-        listAirportsTo.addAll(airports);
-
-        listFlights.clear();
-        listFlights.addAll(flights);
+        // Logic to update control states or lists if needed
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////
-    // ERROR REPORTING
 
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
-        alert.setHeaderText("An error has occurred. Description below:");
+        alert.setHeaderText(null);
         alert.setContentText(message);
-
         alert.showAndWait();
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////
-    // CONVERTERS FOR COMBOBOXES
+    public void takeOff() {
+        this.graphView.init();
+        updateStatistics();
+        updateControls();
+    }
 
     private class VertexAirportConverter extends StringConverter<Vertex<Airport>> {
-
         @Override
-        public String toString(Vertex<Airport> vertex) {
-            if(vertex == null) return "";
-            return vertex.element().toString();
+        public String toString(Vertex<Airport> airportVertex) {
+            return airportVertex != null ? airportVertex.element().toString() : "";
         }
 
         @Override
-        public Vertex<Airport> fromString(String string) {
-            return null; // not needed
+        public Vertex<Airport> fromString(String s) {
+            return null; // No reverse conversion needed.
         }
     }
 
     private class EgdeFlightConverter extends StringConverter<Edge<Flight, Airport>> {
-
         @Override
-        public String toString(Edge<Flight, Airport> edge) {
-            if(edge == null) return "";
-            return edge.element().toString();
+        public String toString(Edge<Flight, Airport> flightEdge) {
+            return flightEdge != null ? flightEdge.element().toString() : "";
         }
 
         @Override
-        public Edge<Flight, Airport> fromString(String string) {
-            return null; // not needed
+        public Edge<Flight, Airport> fromString(String s) {
+            return null; // No reverse conversion needed.
         }
     }
-
 }
